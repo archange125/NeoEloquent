@@ -751,8 +751,8 @@ class Builder extends IlluminateQueryBuilder {
      */
     public function first($columns = array('*'))
     {
-        $results = $this->take(1)->get($columns)->current();
-        //$results[0]) && count($results[0]) > 0
+        $resultSet = $this->take(1)->get($columns);
+        $results = $resultSet->count() > 0 ? $resultSet->current() : [];
         return (isset($results[0])) ? $results[0]->getProperties() : null;
     }
 
